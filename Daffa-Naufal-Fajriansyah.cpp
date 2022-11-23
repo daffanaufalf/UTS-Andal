@@ -7,7 +7,7 @@ int nip_pegawai;
 int tahun_masuk, lama_kerja, jabatan, status_karyawan, status_pernikahan, jumlah_anak;
 int gapok;
 int tunjangan, tunjangan_tetap, tunjangan_transport, tunjangan_istri, tunjangan_anak, state_tunjangan;
-char state = 'Y';
+char state = !'Y';
 int total_gaji;
 
 int LamaKerja()
@@ -98,33 +98,6 @@ int GajiPokok()
     return gapok;
 }
 
-int State()
-{
-
-    gapok = GajiPokok();
-
-    cin >> state;
-
-    if (state == 'Y')
-    {
-        cout << "Gaji Pokok: ";
-        cout << gapok;
-        cout << endl;
-    }
-
-    return state;
-}
-
-int StateProgrammer()
-{
-    if (state != 'Y')
-    {
-        cout << "Thanks :D";
-    }
-
-    return state;
-}
-
 int Tunjangan()
 {
     if (status_karyawan == 1)
@@ -193,6 +166,31 @@ int TotalGaji()
     return total_gaji;
 }
 
+int State()
+{
+
+    gapok = GajiPokok();
+
+    cin >> state;
+
+    if (state == 'Y')
+    {
+        cout << "Gaji Pokok: ";
+        cout << gapok;
+        cout << endl;
+        state_tunjangan = StateTunjangan();
+        cout << "\n=========================================\n";
+        total_gaji = TotalGaji();
+    }
+
+    else
+    {
+        cout << "Thanks :D";
+    }
+
+    return state;
+}
+
 int main()
 {
 
@@ -237,10 +235,7 @@ int main()
     cout << "Proses Gaji Karyawan: ";
     cout << nama_pegawai;
     cout << " (Y/T): ";
-    state = State(), StateProgrammer();
-    state_tunjangan = StateTunjangan();
-    cout << "\n=========================================\n";
-    total_gaji = TotalGaji();
+    state = State();
 
     cin.get();
     return 0;
