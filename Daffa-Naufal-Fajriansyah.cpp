@@ -8,7 +8,11 @@ int tahun_masuk, lama_kerja, jabatan, status_karyawan, status_pernikahan, jumlah
 int gapok;
 int tunjangan, tunjangan_tetap, tunjangan_transport, tunjangan_istri, tunjangan_anak, state_tunjangan;
 char state = !'Y';
-int total_gaji;
+float pph;
+int total_gaji, gaji_bersih;
+int programmer;
+long long nim = 2212500611;
+long long input_nim;
 
 int LamaKerja()
 {
@@ -95,6 +99,10 @@ int GajiPokok()
         gapok = 1000000;
     }
 
+    cout << "Gaji Pokok: \t\t";
+    cout << gapok;
+    cout << endl;
+
     return gapok;
 }
 
@@ -104,21 +112,21 @@ int Tunjangan()
     {
 
         tunjangan_tetap = 2 * gapok;
-        cout << "Tunjangan Tetap: ";
+        cout << "Tunjangan Tetap: \t";
         cout << tunjangan_tetap;
     }
 
     else if (status_karyawan == 2)
     {
         tunjangan_transport = 25 * 15000;
-        cout << "Tunjangan Transport: ";
+        cout << "\nTunjangan Transport: \t";
         cout << tunjangan_transport;
     }
 
     if (status_pernikahan == 1)
     {
         tunjangan_istri = 250000;
-        cout << "\nTunjangan Istri: ";
+        cout << "\nTunjangan Istri: \t";
         cout << tunjangan_istri;
     }
 
@@ -133,7 +141,7 @@ int TunjanganAnak()
         if (jumlah_anak < 4)
         {
             tunjangan_anak = (200000 * jumlah_anak);
-            cout << "\nTunjangan Anak: ";
+            cout << "\nTunjangan Anak: \t";
             cout << tunjangan_anak;
         }
 
@@ -141,7 +149,7 @@ int TunjanganAnak()
         {
             jumlah_anak = 3;
             tunjangan_anak = (200000 * jumlah_anak);
-            cout << "\nTunjangan Anak: ";
+            cout << "\nTunjangan Anak: \t";
             cout << tunjangan_anak;
         }
     }
@@ -160,32 +168,66 @@ int StateTunjangan()
 int TotalGaji()
 {
     total_gaji = gapok + (tunjangan_tetap + tunjangan_transport + tunjangan_istri + tunjangan_anak);
-    cout << "Total Gaji: ";
+    cout << "\nTotal Gaji: \t\t";
     cout << total_gaji;
 
     return total_gaji;
 }
 
+int PPH()
+{
+    pph = 0.05 * gapok;
+    cout << "\nPPH: \t\t\t";
+    cout << pph;
+
+    return pph;
+}
+
+int GajiBersih()
+{
+    gaji_bersih = total_gaji - pph;
+    cout << "\nGaji Bersih: \t\t";
+    cout << gaji_bersih;
+
+    return gaji_bersih;
+}
+
+int Programmer()
+{
+    cout << "\nNIM: \t";
+    cin >> input_nim;
+
+    if (input_nim == nim)
+    {
+        cout << "Nama: \t";
+        cout << "Daffa Naufal Fajriansyah";
+    }
+
+    return programmer;
+}
+
 int State()
 {
-
-    gapok = GajiPokok();
 
     cin >> state;
 
     if (state == 'Y')
     {
-        cout << "Gaji Pokok: ";
-        cout << gapok;
-        cout << endl;
+        cout << "-------------------------------------------------------\n";
+        gapok = GajiPokok();
         state_tunjangan = StateTunjangan();
-        cout << "\n=========================================\n";
+        cout << "\n=====================================================";
         total_gaji = TotalGaji();
+        pph = PPH();
+        gaji_bersih = GajiBersih();
+        cout << "\n=====================================================\n";
     }
 
     else
     {
-        cout << "Thanks :D";
+        cout << "-------------------------------------------------------\n";
+        cout << "Programmer: ";
+        programmer = Programmer();
     }
 
     return state;
