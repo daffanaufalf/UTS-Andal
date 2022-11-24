@@ -1,4 +1,5 @@
 #include <iostream>
+#include <istream>
 
 using namespace std;
 
@@ -10,14 +11,45 @@ int tunjangan, tunjangan_tetap, tunjangan_transport, tunjangan_istri, tunjangan_
 char state = !'Y';
 float pph;
 int total_gaji, gaji_bersih;
-int programmer;
+int programmer, ulang;
 long long nim = 2212500611;
 long long input_nim;
+
+string InputNamaPegawai()
+{
+    cout << "Nama Pegawai: ";
+    cin >> nama_pegawai;
+    cout << endl;
+    return nama_pegawai;
+}
+
+int InputNIP()
+{
+    cout << "NIP: ";
+    cin >> nip_pegawai;
+    cout << endl;
+
+    return nip_pegawai;
+}
+
+int InputTahunMasuk()
+{
+    cout << "Tahun Masuk: ";
+    cin >> tahun_masuk;
+    cout << endl;
+
+    return tahun_masuk;
+}
 
 int LamaKerja()
 {
     int tahun_sekarang = 2022;
     lama_kerja = tahun_sekarang - tahun_masuk;
+
+    cout << "Lama Kerja: ";
+    cout << lama_kerja;
+    cout << endl;
+
     return lama_kerja;
 }
 
@@ -26,15 +58,18 @@ int Jabatan()
     switch (jabatan)
     {
     case 1:
-        cout << "Staff" << endl;
         break;
     case 2:
-        cout << "Manager" << endl;
         break;
     case 3:
-        cout << "Direktur" << endl;
         break;
     }
+
+    cout << "\nPilih Jabatan: \n";
+    cout << "1. Staff \n2. Manager\n3. Direktur\n";
+    cout << "Jabatan: ";
+    cin >> jabatan;
+
     return jabatan;
 }
 
@@ -43,12 +78,16 @@ int StatusKaryawan()
     switch (status_karyawan)
     {
     case 1:
-        cout << "Tetap" << endl;
         break;
     case 2:
-        cout << "Honorer" << endl;
         break;
     }
+
+    cout << "\nPilih Status Karyawan: \n";
+    cout << "1. Tetap \n2. Honorer\n";
+    cout << "Status Karyawan: ";
+    cin >> status_karyawan;
+
     return status_karyawan;
 }
 
@@ -63,6 +102,11 @@ int StatusPernikahan()
         cout << "" << endl;
         break;
     }
+
+    cout << "\nPilih Status Pernikahan: \n";
+    cout << "1. Menikah \n2. Belum Menikah\n";
+    cout << "Status Pernikahan: ";
+    cin >> status_pernikahan;
 
     return status_pernikahan;
 }
@@ -194,6 +238,7 @@ int GajiBersih()
 
 int Programmer()
 {
+    cout << "Programmer: ";
     cout << "\nNIM: \t";
     cin >> input_nim;
 
@@ -209,6 +254,9 @@ int Programmer()
 int State()
 {
 
+    cout << "Proses Gaji Karyawan: ";
+    cout << nama_pegawai;
+    cout << " (Y/T): ";
     cin >> state;
 
     if (state == 'Y')
@@ -221,13 +269,20 @@ int State()
         pph = PPH();
         gaji_bersih = GajiBersih();
         cout << "\n=====================================================\n";
+        programmer = Programmer();
+        cout << "\n=====================================================\n";
+        cout << "Apakah Anda Ingin Mengulang menggunakan program ini ? (Y/T): ";
+        cin >> state;
+        cout << endl;
     }
 
-    else
+    else if (state == 'T')
     {
-        cout << "-------------------------------------------------------\n";
-        cout << "Programmer: ";
+        cout << "=====================================================\n";
         programmer = Programmer();
+        cout << "\n=====================================================\n";
+        cout << "Apakah Anda Ingin Mengulang menggunakan program ini ? (Y/T): ";
+        cin >> state;
     }
 
     return state;
@@ -236,48 +291,19 @@ int State()
 int main()
 {
 
-    cout << "Nama Pegawai: ";
-    getline(cin, nama_pegawai);
-    cout << endl;
-
-    cout << "NIP: ";
-    cin >> nip_pegawai;
-    cout << endl;
-
-    cout << "Tahun Masuk: ";
-    cin >> tahun_masuk;
-    cout << endl;
-
-    lama_kerja = LamaKerja();
-    cout << "Lama Kerja: ";
-    cout << lama_kerja;
-    cout << endl;
-
-    jabatan = Jabatan();
-    cout << "\nPilih Jabatan: \n";
-    cout << "1. Staff \n2. Manager\n3. Direktur\n";
-    cout << "Jabatan: ";
-    cin >> jabatan;
-
-    status_karyawan = StatusKaryawan();
-    cout << "Pilih Status Karyawan: \n";
-    cout << "1. Tetap \n2. Honorer\n";
-    cout << "Status Karyawan: ";
-    cin >> status_karyawan;
-    cout << endl;
-
-    status_pernikahan = StatusPernikahan();
-    cout << "Pilih Status Pernikahan: \n";
-    cout << "1. Menikah \n2. Belum Menikah\n";
-    cout << "Status Pernikahan: ";
-    cin >> status_pernikahan;
-
-    jumlah_anak = JumlahAnak();
-
-    cout << "Proses Gaji Karyawan: ";
-    cout << nama_pegawai;
-    cout << " (Y/T): ";
-    state = State();
+    do
+    {
+        nama_pegawai = InputNamaPegawai();
+        nip_pegawai = InputNIP();
+        tahun_masuk = InputTahunMasuk();
+        lama_kerja = LamaKerja();
+        jabatan = Jabatan();
+        status_karyawan = StatusKaryawan();
+        status_pernikahan = StatusPernikahan();
+        jumlah_anak = JumlahAnak();
+        state = State();
+    } while (state == 'Y' or state == 'y');
+    cout << "Selesai";
 
     cin.get();
     return 0;
