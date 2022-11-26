@@ -7,8 +7,6 @@ Created by :
 */
 
 #include <iostream>
-#include <string>
-#include <istream>
 #include <stdio.h>
 
 using namespace std;
