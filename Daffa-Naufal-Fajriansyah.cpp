@@ -17,7 +17,7 @@ int i;                      // gaji pokok
 int an;                     // tunjangan tetap
 int sy;                     // tunjangan transport
 int ah;                     // tunjangan istri
-int tunjangan_anak;         // tunjangan anak
+int daffanaufal;            // tunjangan anak
 int fajri;                  // untuk menampung return dan kondisi tunjangan
 char faj = !'Y';            // menampung pilihan Y saat memilih Y/T
 float jri;                  // pph
@@ -109,14 +109,12 @@ int StatusPernikahan()
     switch (j)
     {
     case 1:
-        cout << "" << endl;
         break;
     case 2:
-        cout << "" << endl;
         break;
     }
 
-    cout << "Pilih Status Pernikahan: \n";
+    cout << "\nPilih Status Pernikahan: \n";
     cout << "1. Menikah \n2. Belum Menikah\n";
     cout << "Status Pernikahan: ";
     cin >> j;
@@ -131,6 +129,7 @@ int JumlahAnak()
         cout << "Jumlah Anak: ";
         cin >> r;
     }
+
     return r;
 }
 
@@ -167,14 +166,15 @@ int Tunjangan()
 {
     if (f == 1)
     {
-
         an = 2 * i;
+        sy = 0;
         cout << "Tunjangan Tetap: \t";
         cout << an;
     }
 
     else if (f == 2)
     {
+        an = 0;
         sy = 25 * 15000;
         cout << "Tunjangan Transport: \t";
         cout << sy;
@@ -187,6 +187,11 @@ int Tunjangan()
         cout << ah;
     }
 
+    else if (j == 2)
+    {
+        ah = 0;
+    }
+
     return an, sy, ah;
 }
 
@@ -197,34 +202,39 @@ int TunjanganAnak()
 
         if (r < 4)
         {
-            tunjangan_anak = (200000 * r);
+            daffanaufal = (200000 * r);
             cout << "\nTunjangan Anak: \t";
-            cout << tunjangan_anak;
+            cout << daffanaufal;
         }
 
-        else
+        else if (r = 3)
         {
-            r = 3;
-            tunjangan_anak = (200000 * r);
+            daffanaufal = (200000 * r);
             cout << "\nTunjangan Anak: \t";
-            cout << tunjangan_anak;
+            cout << daffanaufal;
         }
     }
-    return tunjangan_anak;
+
+    if (j == 2)
+    {
+        daffanaufal = 0;
+    }
+
+    return daffanaufal;
 }
 
 int StateTunjangan()
 {
 
     an, sy, ah = Tunjangan();
-    tunjangan_anak = TunjanganAnak();
+    daffanaufal = TunjanganAnak();
 
     return fajri;
 }
 
 int TotalGaji()
 {
-    syah = i + (an + sy + ah + tunjangan_anak);
+    syah = i + an + sy + ah + daffanaufal;
     cout << "\nTotal Gaji: \t\t";
     cout << syah;
 
