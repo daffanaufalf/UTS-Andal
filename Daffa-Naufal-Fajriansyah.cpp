@@ -1,3 +1,11 @@
+/* First build 21-11-2022 at 11.59 AM
+Modify 1 23-11-2022 at 10.00 AM
+Modify 2 25-11-2022 at 4.40 PM
+Last Modify 26-11-2022 8.40 AM
+Created by :
+2212500611, Daffa Naufal Fajriansyah
+*/
+
 #include <iostream>
 #include <string>
 #include <istream>
